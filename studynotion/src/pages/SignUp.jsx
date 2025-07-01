@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import user from "../assets/user.png";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [selectedField, setSelectedField] = useState("student");
@@ -25,6 +26,7 @@ const SignUp = () => {
     console.log("--------------------------- all your data ----------------------------")
     console.log(selectedField)
     console.log(formData)
+    toast("Account Created Successfully");
 
     setFormData({
       firstName:"",
