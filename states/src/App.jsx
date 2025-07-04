@@ -11,7 +11,6 @@ import InputField from './components/InputField'
 import CheckboxControl from './components/CheckboxControl'
 import RadioControl from './components/RadioControl'
 import RenderComponent from './components/RenderComponent'
-
 const App = () => {
 
   // If you want to pass the variable of your data in  your component then 
@@ -113,7 +112,8 @@ const App = () => {
       {/* <InputField /> */}
       {/* <CheckboxControl /> */}
       {/* <RadioControl /> */}
-      {/* <RenderComponent data={users}/> */}
+      <RenderComponent data={users}/>
+
 
     </div>
   )
