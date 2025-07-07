@@ -1,35 +1,38 @@
-import React, { useState } from 'react'
-import UseState from './components/UseState'
-import Toggle from './components/Toggle'
-import MultiCondition from './components/MultiCondition'
-import PropsComponent from './components/PropsComponent'
-import College from './components/College'
-import Student from './components/Student'
-import DefaultProps from './components/DefaultProps'
-import Wrapper from './components/Wrapper'
-import InputField from './components/InputField'
-import CheckboxControl from './components/CheckboxControl'
-import RadioControl from './components/RadioControl'
-import RenderComponent from './components/RenderComponent'
+import React, { useEffect, useState } from "react";
+import UseState from "./components/UseState";
+import Toggle from "./components/Toggle";
+import MultiCondition from "./components/MultiCondition";
+import PropsComponent from "./components/PropsComponent";
+import College from "./components/College";
+import Student from "./components/Student";
+import DefaultProps from "./components/DefaultProps";
+import Wrapper from "./components/Wrapper";
+import InputField from "./components/InputField";
+import CheckboxControl from "./components/CheckboxControl";
+import RadioControl from "./components/RadioControl";
+import RenderComponent from "./components/RenderComponent";
+import College1 from "./components/College1";
+import Counter from "./components/Counter";
+import UseRef from "./components/UseRef";
+import UncontrolledComponent from "./components/UncontrolledComponent";
 const App = () => {
-
-  // If you want to pass the variable of your data in  your component then 
-  const userName = "sachin "
+  // If you want to pass the variable of your data in  your component then
+  const userName = "sachin ";
   const age = 23;
-  const email = "sachin@test.com"
+  const email = "sachin@test.com";
   const userObject1 = {
-    name:"Sachin Sharma",
-    age:"23",
-    email:"sachin@test.com"
-  }
+    name: "Sachin Sharma",
+    age: "23",
+    email: "sachin@test.com",
+  };
   const userObject2 = {
-    name:"Saurabh Sharma",
-    age:"21",
-    email:"saurabh@test.com"
-  }
+    name: "Saurabh Sharma",
+    age: "21",
+    email: "saurabh@test.com",
+  };
 
-  const collegeNames = ['NIT','MIT','IIT',"IIIT"]
-  const [student,setStudent] = useState("bhaskar");
+  const collegeNames = ["NIT", "MIT", "IIT", "IIIT"];
+  const [student, setStudent] = useState("bhaskar");
   // return (
   //   <div>
   //     <hr />
@@ -38,7 +41,7 @@ const App = () => {
   //     <Toggle />
   //     {
   //       student === '' ? null : <Student name={student} />
-        
+
   //     }
   //     <button onClick={() => setStudent("Ravi")}>Change Name</button>
 
@@ -60,7 +63,6 @@ const App = () => {
   //     <hr />
   //     <PropsComponent users={userObject2}/>
 
-
   //     {/* Default Props */}
   //     <hr />
   //     <DefaultProps name="krishna"/>
@@ -80,43 +82,150 @@ const App = () => {
   //   </div>
   // )
 
-
   const users = [
     {
-      name:"sachin",
-      age:'23',
-      email:"sachin@test.com",
-      id:'1'
+      name: "sachin",
+      age: "23",
+      email: "sachin@test.com",
+      id: "1",
     },
     {
-      name:"sachin1",
-      age:'231',
-      email:"sachin1@test.com",
-      id:'2'
+      name: "sachin1",
+      age: "231",
+      email: "sachin1@test.com",
+      id: "2",
     },
     {
-      name:"sachin2",
-      age:'223',
-      email:"sachin2@test.com",
-      id:'3'
+      name: "sachin2",
+      age: "223",
+      email: "sachin2@test.com",
+      id: "3",
     },
     {
-      name:"sachin4",
-      age:'24',
-      email:"sachin4@test.com",
-      id:'4'
-    }
-  ]
+      name: "sachin4",
+      age: "24",
+      email: "sachin4@test.com",
+      id: "4",
+    },
+  ];
+
+  //College Data
+  const collegeData = [
+    {
+      name: "IET Alwar",
+      city: "Alwar",
+      website: "www.iet.com",
+      student: {
+        name: "sachin",
+        age: "23",
+        email: "sachin@test.com",
+      },
+    },
+    {
+      name: "IIT Delhi",
+      city: "Delhi",
+      website: "www.iit.com",
+      student: {
+        name: "sachin1",
+        age: "23",
+        email: "sachin1@test.com",
+      },
+    },
+    {
+      name: "NIT Rurki",
+      city: "Rurki",
+      website: "www.nit.com",
+      student: {
+        name: "sachin2",
+        age: "23",
+        email: "sachin2@test.com",
+      },
+    },
+    {
+      name: "MIT Pune",
+      city: "Pune",
+      website: "www.mit.com",
+      student: {
+        name: "sachin3",
+        age: "23",
+        email: "sachin3@test.com",
+      },
+    },
+  ];
+  // return (
+  //   <div>
+  //     {/* <InputField /> */}
+  //     {/* <CheckboxControl /> */}
+  //     {/* <RadioControl /> */}
+  //     {/* <RenderComponent data={users}/> */}
+
+  //     {
+  //       collegeData.map((college, index) => (
+  //           <div key={index}>
+  //               <College1 college={college} />
+  //           </div>
+  //       ))
+  //     }
+
+  //   </div>
+  // )
+
+  // useEffect Handling dependency
+  // useEffect(() => {
+  //   //call every time
+  // })
+
+  //  useEffect(() => {
+  //   //call only once
+  // },[])
+
+  //  useEffect(() => {
+  //   //call on changing single state
+  // },[state1])
+
+  //  useEffect(() => {
+  //   //call call on changing both state
+  // }[state1,state2])
+
+  const [count, setCount] = useState(0);
+  const [data, setData] = useState(0);
+
+  // useEffect(() => {
+  //   counterFunction();
+  // }, [count, data]);
+
+  // useEffect(() => {
+  //   callOnes();
+  // },[])
+
+  function counterFunction() {
+    console.log("Counter: " + count);
+  }
+  const callOnes = () => {
+    console.log("Call Ones Data: " + data);
+  };
+
   return (
+    // <div>
+    //   <h1>useEffect Hook</h1>
+    //   <button onClick={() => setCount(count + 1)}>Counter {count}</button>
+    //   <button onClick={() => setData(data + 1)}>Data: {data}</button>
+    //   <Counter counter={count} data={data}/>
+    // </div>
+
     <div>
-      {/* <InputField /> */}
-      {/* <CheckboxControl /> */}
-      {/* <RadioControl /> */}
-      <RenderComponent data={users}/>
+      {/* <h1>Handle Props Side Effect with useEffect in component.</h1>
+      <Counter counter={count} data={data}/> */}
 
+      {/* useRef hook */}
 
+      {/* <h1>useRef Hook</h1>
+      <UseRef /> */}
+
+      <UncontrolledComponent />
     </div>
-  )
-}
 
-export default App
+  );
+};
+
+export default App;
