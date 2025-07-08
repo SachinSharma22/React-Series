@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState, useTransition } from "react";
+import {useFormStatus} from 'react-dom'
 import UseState from "./components/UseState";
 import Toggle from "./components/Toggle";
 import MultiCondition from "./components/MultiCondition";
@@ -15,6 +16,8 @@ import College1 from "./components/College1";
 import Counter from "./components/Counter";
 import UseRef from "./components/UseRef";
 import UncontrolledComponent from "./components/UncontrolledComponent";
+import PropsFunction from "./components/PropsFunction";
+import ForwardRef from "./components/ForwardRef";
 const App = () => {
   // If you want to pass the variable of your data in  your component then
   const userName = "sachin ";
@@ -205,27 +208,99 @@ const App = () => {
     console.log("Call Ones Data: " + data);
   };
 
-  return (
+  // return (
+  //   // <div>
+  //   //   <h1>useEffect Hook</h1>
+  //   //   <button onClick={() => setCount(count + 1)}>Counter {count}</button>
+  //   //   <button onClick={() => setData(data + 1)}>Data: {data}</button>
+  //   //   <Counter counter={count} data={data}/>
+  //   // </div>
+
+  //   <div>
+  //     {/* <h1>Handle Props Side Effect with useEffect in component.</h1>
+  //     <Counter counter={count} data={data}/> */}
+
+  //     {/* useRef hook */}
+
+  //     {/* <h1>useRef Hook</h1>
+  //     <UseRef /> */}
+
+  //     <UncontrolledComponent />
+  //   </div>
+
+  // );
+   
+
+  //passing function as a props
+
+  function displayAlter (name) {
+    alert("Hello " + name)
+  } 
+  function getUser () {
+    alert("This is get user function")
+  }
+
+  const forRef = useRef(null)
+
+  const handleForward = () => {
+    forRef.current.value = 20000;
+  }
+
+  //handle form submit
+
+  
+  const handleSubmit = async() => {
+    await new Promise(res=>setTimeout(res,2000));
+    console.log("form submitted")
+  }
+
+  function CustomerForm() {
+    const {pending} = useFormStatus()
+    console.log(pending)
+    return (
+      <div>
+      <input type="text" placeholder="enter name" /> <br /><br />
+      <input type="password" placeholder="enter password"/> <br /><br />
+      <button disabled={pending}>{pending ? 'Submiting...' : "Submit"}</button>
+    </div>
+    )
+  }
+
+  const [pending,startTransition] = useTransition();
+
+  const handleTrans = () => {
+    startTransition(async() => {
+      await new Promise(res => setTimeout(res,2000))
+    })
+  }
+  return(
     // <div>
-    //   <h1>useEffect Hook</h1>
-    //   <button onClick={() => setCount(count + 1)}>Counter {count}</button>
-    //   <button onClick={() => setData(data + 1)}>Data: {data}</button>
-    //   <Counter counter={count} data={data}/>
+    //   <PropsFunction display={displayAlter} name="aman" getuser={getUser}/>
+    //   <PropsFunction display={displayAlter} name="rohit" />
+    //   <PropsFunction display={displayAlter} name="shyam" />
+    //   <PropsFunction display={displayAlter} name="ajeet" />
     // </div>
 
+    // <div>
+    //   <h1>Forward ref</h1>
+    //   <ForwardRef ref={forRef} />
+    //   <button onClick={handleForward}>Forward</button>
+    // </div>
+     
     <div>
-      {/* <h1>Handle Props Side Effect with useEffect in component.</h1>
-      <Counter counter={count} data={data}/> */}
-
-      {/* useRef hook */}
-
-      {/* <h1>useRef Hook</h1>
-      <UseRef /> */}
-
-      <UncontrolledComponent />
+      <h1>useFormStatus hook</h1>
+      <form action={handleSubmit}>
+        <CustomerForm />
+      </form>
+      {
+        pending ?
+        "pending..." :
+        null
+      }
+      <button disabled={pending} onClick={handleTrans}>transition</button>
     </div>
+  )
 
-  );
 };
 
 export default App;
