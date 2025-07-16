@@ -1,46 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import UserAdd from "./UserAdd";
+import UserList from "../UserList";
+import NavBar from "./NavBar";
+import { Navigate } from "react-router-dom";
+import UserEdit from "./UserEdit";
+import UseActionHook from "./UseActionHook";
+import ColorMixer from "./ColorMixer";
 
 const App = () => {
-  const [userData,setUserData] = useState([])
-  const [loading,setLoading] = useState(false)
-  useEffect(() => {
-    setLoading(true)
-    getUserData()
-  },[])
-  const getUserData = async() => {
-    const url = "http://localhost:3000/users"
-    let response =  await fetch(url)
-    response = await response.json()
-    console.log(response)
-    setUserData(response)
-    setLoading(false)
-  }
-  console.log(userData)
-  return (
+  // return (
+  //   <div>
+  //     <NavBar />
+  //     <Routes>
+  //       <Route path="/" element={<Navigate to="/userlist" />} />
+  //       <Route path="/useradd" element={<UserAdd />} />
+  //       <Route path="/userlist" element={<UserList />} />
+  //       <Route path="/edit/:id" element={<UserEdit />} />
+  //     </Routes>
+  //   </div>
+  // );
+   
+  //useActionState hook example
+  return(
     <div>
-      <h1>Make Routes and pages for Add User and User List UI </h1>
-      <ul style={{display:"flex", justifyContent:"space-around", border:"1px solid black", padding:"5px", listStyle:"none"}}>
-        <li>Name</li>
-        <li>Age</li>
-        <li>Email</li>
-      </ul>
-      {
-        !loading ?
-        userData.map((user) => (
-        <div key={user.id} >
-          <ul style={{display:"flex", justifyContent:"space-around", border:"1px solid black", padding:"5px", listStyle:"none"}}>
-            <li style={{ padding:"5px"}}>{user.name}</li>
-            <li style={{ padding:"5px"}}>{user.age}</li>
-            <li style={{ padding:"5px"}}>{user.email}</li>
-          </ul>
-
-        </div>
-      ))
-      :
-      <h1>data Loading...</h1>
-      }
+      {/* <UseActionHook /> */}
+      <ColorMixer />
     </div>
   )
-}
+};
 
-export default App
+export default App;
